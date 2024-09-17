@@ -18,13 +18,12 @@ export const Footer = () => {
             />
           </Col>
           <Col size={12} sm={6}>
-            <img src={logo} alt="Logo" />
+            <img src={logo} alt="Logo" style={{ width: '50%', height: 'auto' }} />
           </Col>
           <Col size={12} sm={6} className="text-center text-sm-end">
             <div className="social-icon">
-              <a href="#"><img src={navIcon1} alt="Icon" /></a>
-              <a href="#"><img src={navIcon2} alt="Icon" /></a>
-              <a href="#"><img src={navIcon3} alt="Icon" /></a>
+              <a href="https://www.linkedin.com/in/raozeeshanaltaf/"><img src={navIcon1} alt="Icon" /></a>
+              <a href="https://www.facebook.com/raozeeshan.altaf.3"><img src={navIcon2} alt="Icon" /></a>
             </div>
             <p>Copyright 2024. All Rights Reserved</p>
           </Col>

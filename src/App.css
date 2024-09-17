@@ -188,6 +188,10 @@ span.navbar-text {
 	height: 100%;
 	position: absolute;
 }
+.navbar-brand img {
+  width: 130%; /* Increase the width to your desired size */
+  height: auto; /* Increase the height to your desired size */
+}
 nav.navbar .navbar-toggler:active,
 nav.navbar .navbar-toggler:focus {
 	outline: none;
@@ -261,6 +265,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   font-weight: 700;
   letter-spacing: 0.8px;
   line-height: 1;
+  margin-top: 60px;
   margin-bottom: 20px;
   display: block;
 }

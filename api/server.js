@@ -25,7 +25,7 @@ transporter.verify((error) => {
   }
 });
 
-app.post("/contact", (req, res) => {
+app.post("/api/contact", (req, res) => {
   const { firstName, lastName, email, message, phone } = req.body;
   const name = `${firstName} ${lastName}`;
 
@@ -52,7 +52,7 @@ app.post("/contact", (req, res) => {
   });
 });
 
-app.post("/subscribe", (req, res) => {
+app.post("/api/subscribe", (req, res) => {
   const { email } = req.body;
   
   const mail = {

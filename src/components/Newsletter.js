@@ -15,7 +15,8 @@ export const Newsletter = ({ status, message, onValidated }) => {
     e.preventDefault();
     if (email && email.indexOf("@") > -1) {
       try {
-        const response = await axios.post('http://localhost:5000/subscribe', { email });
+        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+        const response = await axios.post(`${apiUrl}/subscribe`, { email });
         setResponseStatus(response.data.status);
         setResponseMessage(response.data.message);
       } catch (error) {

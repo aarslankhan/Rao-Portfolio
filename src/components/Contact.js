@@ -26,8 +26,9 @@ export const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setButtonText("Sending...");
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
     try {
-      let response = await fetch("http://localhost:5000/contact", {
+      const response = await fetch(`${apiUrl}/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json;charset=utf-8",

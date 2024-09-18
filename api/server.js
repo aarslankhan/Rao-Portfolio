@@ -56,8 +56,8 @@ app.post("/subscribe", (req, res) => {
   const { email } = req.body;
   
   const mail = {
-    from: process.env.SMTP_USER, // Your email address
-    to: process.env.RECEIVER_EMAIL, // Email address to receive subscription notifications
+    from: process.env.SMTP_USER, 
+    to: process.env.RECEIVER_EMAIL, 
     subject: "Newsletter Subscription",
     html: `<p>New subscription request from: ${email}</p>`,
   };

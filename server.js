@@ -1,54 +1,76 @@
 const express = require("express");
-const router = express.Router();
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 require('dotenv').config(); 
 
-// server used to send send emails
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use("/", router);
-app.listen(5000, () => console.log("Server Running"));
-console.log(process.env.EMAIL_USER);
-console.log(process.env.EMAIL_PASS);
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: process.env.SMTP_PORT,
-  secure: true, // Use true for 465, false for other ports
+  secure: true,
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
 });
-contactEmail.verify((error) => {
+
+transporter.verify((error) => {
   if (error) {
-    console.log(error);
+    console.log("Error verifying transporter: ", error);
   } else {
-    console.log("Ready to Send");
+    console.log("Server is ready to send emails");
   }
 });
 
-router.post("/contact", (req, res) => {
-  const name = req.body.firstName + req.body.lastName;
-  const email = req.body.email;
-  const message = req.body.message;
-  const phone = req.body.phone;
+app.post("/contact", (req, res) => {
+  const { firstName, lastName, email, message, phone } = req.body;
+  const name = `${firstName} ${lastName}`;
+
   const mail = {
-    from: name,
-    to: "********@gmail.com",
+    from: process.env.RECEIVER_EMAIL,
+    to: process.env.RECEIVER_EMAIL,
     subject: "Contact Form Submission - Portfolio",
-    html: `<p>Name: ${name}</p>
-           <p>Email: ${email}</p>
-           <p>Phone: ${phone}</p>
-           <p>Message: ${message}</p>`,
+    html: `
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
+      <p><strong>Message:</strong> ${message}</p>
+    `,
   };
-  contactEmail.sendMail(mail, (error) => {
+
+  transporter.sendMail(mail, (error, info) => {
     if (error) {
-      res.json(error);
+      console.error("Error sending email: ", error);
+      return res.status(500).json({ error: "Failed to send email", details: error.message });
     } else {
-      res.json({ code: 200, status: "Message Sent" });
+      console.log("Email sent successfully: ", info.response);
+      return res.status(200).json({ status: "Message Sent" });
     }
   });
 });
+
+app.post("/subscribe", (req, res) => {
+  const { email } = req.body;
+  
+  const mail = {
+    from: process.env.SMTP_USER, // Your email address
+    to: process.env.RECEIVER_EMAIL, // Email address to receive subscription notifications
+    subject: "Newsletter Subscription",
+    html: `<p>New subscription request from: ${email}</p>`,
+  };
+
+  transporter.sendMail(mail, (error, info) => {
+    if (error) {
+      console.error("Error sending email: ", error);
+      return res.status(500).json({ status: 'error', message: 'Failed to subscribe, please try again later.' });
+    } else {
+      console.log("Email sent successfully: ", info.response);
+      return res.status(200).json({ status: 'success', message: 'Subscription successful!' });
+    }
+  });
+});
+
+app.listen(5000, () => console.log("Server Running on port 5000"));

@@ -27,6 +27,10 @@ export default async function handler(req, res) {
       `,
     };
 
+    res.setHeader('Access-Control-Allow-Origin', 'https://raozeeshanaltaf.clickflow.tech');
+    res.setHeader('Access-Control-Allow-Methods', 'POST');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
     try {
       await transporter.sendMail(mail);
       res.status(200).json({ status: 'Message Sent' });

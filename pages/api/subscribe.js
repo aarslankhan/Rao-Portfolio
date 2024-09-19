@@ -21,6 +21,10 @@ export default async function handler(req, res) {
       html: `<p>New subscription request from: ${email}</p>`,
     };
 
+    res.setHeader('Access-Control-Allow-Origin', 'https://raozeeshanaltaf.clickflow.tech');
+    res.setHeader('Access-Control-Allow-Methods', 'POST');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
     try {
       await transporter.sendMail(mail);
       res.status(200).json({ status: 'success', message: 'Subscription successful!' });

@@ -1,15 +1,5 @@
 {
     "version": 2,
-    "builds": [
-      {
-        "src": "pages/api/subscribe.js",
-        "use": "@vercel/static-build"
-      },
-      {
-        "src": "pages/api/contact.js",
-        "use": "@vercel/static-build"
-      }
-    ],
     "routes": [
       {
         "src": "/api/(.*)",

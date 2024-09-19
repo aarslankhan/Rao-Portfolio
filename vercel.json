@@ -15,10 +15,5 @@
         "src": "/api/(.*)",
         "dest": "pages/api/$1"
       }
-    ],
-    "cors": {
-      "allowedOrigins": ["https://raozeeshanaltaf.clickflow.tech"],
-      "allowedMethods": ["POST"],
-      "allowedHeaders": ["Content-Type"]
-    }
+    ]
   }

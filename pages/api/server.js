@@ -59,7 +59,7 @@ app.post("/subscribe", (req, res) => {
     from: process.env.SMTP_USER, 
     to: process.env.RECEIVER_EMAIL, 
     subject: "Newsletter Subscription",
-    html: `<p>New subscription request from: ${email}</p>`,
+    html: `<p>New subscription request from: ${email} </p>`,
   };
 
   transporter.sendMail(mail, (error, info) => {

@@ -11,6 +11,15 @@ const transporter = nodemailer.createTransport({
 });
 
 export default async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', 'https://raozeeshanaltaf.clickflow.tech');
+  res.setHeader('Access-Control-Allow-Methods', 'POST');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
   if (req.method === 'POST') {
     const { firstName, lastName, email, message, phone } = req.body;
     const name = `${firstName} ${lastName}`;
@@ -26,10 +35,6 @@ export default async function handler(req, res) {
         <p><strong>Message:</strong> ${message}</p>
       `,
     };
-
-    res.setHeader('Access-Control-Allow-Origin', 'https://raozeeshanaltaf.clickflow.tech');
-    res.setHeader('Access-Control-Allow-Methods', 'POST');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     try {
       await transporter.sendMail(mail);

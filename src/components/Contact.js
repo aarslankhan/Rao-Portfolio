@@ -26,20 +26,20 @@ export const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setButtonText("Sending...");
-    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+    const apiUrl = process.env.REACT_APP_API_URL || 'https://raozeeshanaltaf.clickflow.tech/api/contact';
     try {
-      const response = await fetch(`${apiUrl}/api/contact`, {
+      const response = await fetch(apiUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
         },
         body: JSON.stringify(formDetails),
       });
-
+  
       if (!response.ok) {
         throw new Error("Network response was not ok.");
       }
-
+  
       let result = await response.json();
       setFormDetails(formInitialDetails);
       if (result.status === "Message Sent") {

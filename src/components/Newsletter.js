@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Col, Row, Alert } from "react-bootstrap";
 import axios from 'axios';
 
-export const Newsletter = ({ status, message, onValidated }) => {
+export const Newsletter = () => {
   const [email, setEmail] = useState('');
   const [responseStatus, setResponseStatus] = useState(null);
   const [responseMessage, setResponseMessage] = useState('');
@@ -15,8 +15,8 @@ export const Newsletter = ({ status, message, onValidated }) => {
     e.preventDefault();
     if (email && email.indexOf("@") > -1) {
       try {
-        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
-        const response = await axios.post(`${apiUrl}/api/subscribe`, { email });
+        const apiUrl = process.env.REACT_APP_API_URL || 'https://raozeeshanaltaf.clickflow.tech/api/subscribe';
+        const response = await axios.post(apiUrl, { email });
         setResponseStatus(response.data.status);
         setResponseMessage(response.data.message);
       } catch (error) {

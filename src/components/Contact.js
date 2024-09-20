@@ -28,7 +28,7 @@ export const Contact = () => {
     setButtonText("Sending...");
     const apiUrl = process.env.REACT_APP_API_URL || 'https://raozeeshanaltaf.clickflow.tech/api/contact';
     try {
-      const response = await fetch(apiUrl, {
+      const response = await fetch(apiUrl/contact, {
         method: "POST",
         headers: {
           "Content-Type": "application/json;charset=utf-8",

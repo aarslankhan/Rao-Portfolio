@@ -16,7 +16,7 @@ export const Newsletter = () => {
     if (email && email.indexOf("@") > -1) {
       try {
         const apiUrl = process.env.REACT_APP_API_URL || 'https://raozeeshanaltaf.clickflow.tech/api/subscribe';
-        const response = await axios.post(apiUrl, { email });
+        const response = await axios.post(apiUrl/subscribe, { email });
         setResponseStatus(response.data.status);
         setResponseMessage(response.data.message);
       } catch (error) {
